@@ -31,7 +31,7 @@ public class ApiService {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() != 200) {
-                throw new ApiException("Błąd HTTP: " + response.statusCode());
+                throw new ApiException("blad HTTP: " + response.statusCode());
             }
 
             JsonArray jsonArray = JsonParser.parseString(response.body()).getAsJsonArray();
@@ -55,7 +55,7 @@ public class ApiService {
             }
 
         } catch (IOException | InterruptedException | JsonParseException e) {
-            throw new ApiException("Blad podczas pobierania danych " + e.getMessage());
+            throw new ApiException("blad pobierania danych " + e.getMessage());
         }
 
         return wynik;

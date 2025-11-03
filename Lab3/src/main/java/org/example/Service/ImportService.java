@@ -15,7 +15,7 @@ public class ImportService {
 
     public ImportService(PracownikManager manager) {
         if (manager == null) {
-            throw new IllegalArgumentException("Manager nie może być null");
+            throw new IllegalArgumentException("nanager nie może być null");
         }
         this.manager = manager;
     }
@@ -39,7 +39,7 @@ public class ImportService {
 
                 String[] pola = linia.split(",");
                 if (pola.length != 6) {
-                    podsumowanie.dodajBlad("Linia " + numerLinii + ": nieprawidłowa liczba pól");
+                    podsumowanie.dodajBlad("Linia " + numerLinii + ": nieprawidlowa liczba pol");
                     continue;
                 }
 
@@ -55,7 +55,7 @@ public class ImportService {
                     int wynagrodzenie = Integer.parseInt(wynagrodzenieStr);
 
                     if (wynagrodzenie <= 0) {
-                        throw new InvalidDataException("Wynagrodzenie mniejsze lub równe 0");
+                        throw new InvalidDataException("zle wynagrodzenie ");
                     }
 
                     Pracownik pracownik = new Pracownik(imie, nazwisko, email, firma, stanowisko);
@@ -71,7 +71,7 @@ public class ImportService {
                 }
             }
         } catch (IOException e) {
-            podsumowanie.dodajBlad("Błąd odczytu pliku: " + e.getMessage());
+            podsumowanie.dodajBlad("blad odczytu: " + e.getMessage());
         }
 
         return podsumowanie;
