@@ -20,6 +20,17 @@ public enum Stanowiska {
         return wynagrodzenieBazowe;
     }
 
+    public Stanowiska nastepneWyzej() {
+        switch (this) {
+            case Stazysta: return Programista;
+            case Programista: return Manager;
+            case Manager: return Wiceprezes;
+            case Wiceprezes: return Prezes;
+            case Prezes: return null;
+            default: return null;
+        }
+    }
+
     public int getPoziomHierarchii() {
         return poziomHierarchii;
     }

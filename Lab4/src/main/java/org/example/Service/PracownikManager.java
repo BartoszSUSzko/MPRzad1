@@ -162,4 +162,53 @@ public class PracownikManager {
         return statystyki;
     }
 
+
+    public void awansPracownika(Pracownik p) {
+        Stanowiska aktualne = p.getStanowisko();
+        Stanowiska nowe = aktualne.nastepneWyzej();
+
+        if (nowe == null) {
+            throw new IllegalArgumentException("nie moze dalej awansowac");
+        }
+
+        p.setStanowisko(nowe);
+        p.setWynagrodzenie(nowe.getWynagrodzenieBazowe());
+    }
+
+    public void podwyzkaProcentowa(Pracownik p, int procent) {
+        if (procent <= 0) {
+            throw new IllegalArgumentException("Podwyżka musi być dodatnia");
+        }
+
+        double nowaPensja = p.getWynagrodzenie() * (1 + procent / 100.0);
+
+        Stanowiska maxStanowisko = p.getStanowisko().nastepneWyzej();
+        if (maxStanowisko != null && nowaPensja > maxStanowisko.getWynagrodzenieBazowe()) {
+            throw new IllegalArgumentException("Za duża podwyżka");
+        }
+
+        p.setWynagrodzenie((int)Math.round(nowaPensja));
+    }
+
+    public List<Pracownik> najlepsiPracownicy(){
+        if (listaPracownikow.isEmpty()) {
+            throw new IllegalArgumentException("pusta lista");
+        }
+        List<Pracownik> najlepsipracownicy = new ArrayList<>();
+        double najwyzszasrednia = 0.0;
+        for (Pracownik p : listaPracownikow) {
+            if(p.sredniaOcen() >  najwyzszasrednia) {
+                najwyzszasrednia = p.sredniaOcen();
+            }
+        }
+        for(Pracownik p : listaPracownikow) {
+            if(najwyzszasrednia == p.sredniaOcen()) {
+                najlepsipracownicy.add(p);
+            }
+        }
+
+        return najlepsipracownicy;
+    }
+
+
 }

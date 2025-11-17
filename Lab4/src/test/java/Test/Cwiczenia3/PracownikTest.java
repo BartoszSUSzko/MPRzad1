@@ -29,12 +29,25 @@ class PracownikTest {
     @Test
     void PustyString() {
         assertThrows(IllegalArgumentException.class,
-                () -> new Pracownik("", "Nowak", "x@x.pl", "FirmaA", Stanowiska.Stazysta));
+                () -> new Pracownik("", "ktosowski", "@ktos", "FirmaA", Stanowiska.Stazysta));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Pracownik("ktos", "", "@ktos", "FirmaA", Stanowiska.Stazysta));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Pracownik("ktos", "ktosowski", "", "FirmaA", Stanowiska.Stazysta));
+    }
+    @Test
+    void nullString() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new Pracownik(null, "ktosowski", "@ktos", "FirmaA", Stanowiska.Stazysta));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Pracownik("ktos", null, "@ktos", "FirmaA", Stanowiska.Stazysta));
+        assertThrows(IllegalArgumentException.class,
+                () -> new Pracownik("ktos", "ktosowski", null, "FirmaA", Stanowiska.Stazysta));
     }
 
     @Test
     void equalsDlaEmaila() {
-        Pracownik p2 = new Pracownik("Adam", "Nowak", "@ktos", "FirmaB", Stanowiska.Stazysta);
+        Pracownik p2 = new Pracownik("A", "A", "@ktos", "FirmaB", Stanowiska.Stazysta);
         assertEquals(pracownik, p2);
         assertEquals(pracownik.hashCode(), p2.hashCode());
     }

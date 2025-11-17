@@ -1,6 +1,10 @@
 package org.example.Models;
 
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Pracownik {
@@ -10,7 +14,8 @@ public class Pracownik {
     private String nazwaFirmy;
     private Stanowiska stanowisko;
     private int wynagrodzenie;
-
+    private LocalDate dataZatrudnienia;
+    private List<Integer> ocenyRoczne = new ArrayList<>();
 
     public Pracownik(String imie, String nazwisko, String email, String nazwaFirmy, Stanowiska stanowisko) {
         setImie(imie);
@@ -19,6 +24,7 @@ public class Pracownik {
         setNazwaFirmy(nazwaFirmy);
         this.stanowisko = stanowisko;
         this.wynagrodzenie = stanowisko.getWynagrodzenieBazowe();
+        this.dataZatrudnienia = LocalDate.now();
     }
 
     public String getImie() {
@@ -101,6 +107,27 @@ public class Pracownik {
 
     }
 
+    public LocalDate getDataZatrudnienia() {
+        return dataZatrudnienia;
+    }
+
+    public void setDataZatrudnienia(LocalDate dataZatrudnienia) {
+        if (dataZatrudnienia == null || dataZatrudnienia.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("data zatrudnienia");
+        }
+        this.dataZatrudnienia = dataZatrudnienia;
+    }
+
+    public int stazWlatach(LocalDate dzisiaj) {
+        if (dataZatrudnienia == null) {
+            throw new IllegalStateException("brak daty zatrudnienia");
+        }
+        if (dzisiaj.isBefore(dataZatrudnienia)) {
+            throw new IllegalArgumentException("data dzisiaj nie moze byc przed data zatrudnienia");
+        }
+        return Period.between(dataZatrudnienia, dzisiaj).getYears();
+    }
+
 
     @Override
     public boolean equals(Object o) {
@@ -115,6 +142,31 @@ public class Pracownik {
         return Objects.hash(email);
     }
 
+    public List<Integer> getOcenyRoczne() {
+        return ocenyRoczne;
+    }
 
+    public void dodajOcene(int ocena){
+        if (ocena < 1 || ocena > 5) {
+            throw new IllegalArgumentException("zle ocenyRoczne!");
+        }
+        ocenyRoczne.add(ocena);
+    }
 
+    public double sredniaOcen(){
+        if (ocenyRoczne.isEmpty()){
+            throw new IllegalArgumentException("zle ocenyRoczne!");
+        }
+        double srednia = 0.0;
+        for (Integer i : ocenyRoczne) {
+            srednia += i;
+        }
+        srednia /= ocenyRoczne.size();
+        return srednia;
+
+    }
+    public boolean czyJubileusz(LocalDate dzisiaj) {
+        int lata = stazWlatach(dzisiaj);
+        return lata > 0 && lata % 5 == 0;
+    }
 }

@@ -34,7 +34,7 @@ public class PracownikManagertest {
 
     @Test
     void dodanieNullPracownikaPowinnoRzucicWyjatek() {
-        assertThrows(IllegalArgumentException.class, () -> {manager.dodajPracownika(null);});
+        assertThrows(IllegalArgumentException.class, () -> manager.dodajPracownika(null));
     }
 
     @Test
