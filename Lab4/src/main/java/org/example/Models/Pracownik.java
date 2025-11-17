@@ -166,6 +166,9 @@ public class Pracownik {
 
     }
     public boolean czyJubileusz(LocalDate dzisiaj) {
+        if(dzisiaj == null || dzisiaj.isAfter(LocalDate.now())) {
+            throw new IllegalArgumentException("zle dzisiaj!");
+        }
         int lata = stazWlatach(dzisiaj);
         return lata > 0 && lata % 5 == 0;
     }
