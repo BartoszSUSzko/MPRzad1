@@ -4,6 +4,8 @@ import com.google.gson.*;
 import org.example.Exception.ApiException;
 import org.example.Models.Pracownik;
 import org.example.Models.Stanowiska;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
 
 import java.io.IOException;
@@ -14,16 +16,27 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Service
 public class ApiService {
+
+    private final HttpClient client;
+    private final Gson gson;
+    private final String apiUrl;
+
+
+    public ApiService(HttpClient client, Gson gson, @Value("${app.api.url}")  String apiUrl) {
+        this.client = client;
+        this.gson = gson;
+        this.apiUrl = apiUrl;
+    }
 
 
     public List<Pracownik> pobierzPracownikowZApi() throws ApiException {
         List<Pracownik> wynik = new ArrayList<>();
-        String url = "https://jsonplaceholder.typicode.com/users";
 
-        HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
+                .uri(URI.create(apiUrl))
                 .GET()
                 .build();
 

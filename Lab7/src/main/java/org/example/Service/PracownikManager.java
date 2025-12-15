@@ -6,9 +6,12 @@ package org.example.Service;
 import org.example.Models.Pracownik;
 import org.example.Models.Stanowiska;
 import org.example.Models.StatystykiFirmy;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 
+
+@Service
 public class PracownikManager {
     private List<Pracownik> listaPracownikow =  new ArrayList<>();
 

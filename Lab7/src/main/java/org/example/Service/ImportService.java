@@ -4,11 +4,13 @@ import org.example.Exception.InvalidDataException;
 import org.example.Models.Pracownik;
 import org.example.Models.PodsumowanieImportu;
 import org.example.Models.Stanowiska;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+@Service
 public class ImportService {
 
     private final PracownikManager manager;

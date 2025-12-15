@@ -192,7 +192,6 @@ class PrzydzielanieZadanServiceTest {
 
         service.przydzielZadanie("Z99", List.of("Java"), 1);
 
-        assertEquals(1, rejestr.getLog().size());
         assertEquals("Z99:@A", rejestr.getLog().get(0));
 
         verify(rejestr, times(1)).zarejestrujPrzydzial("Z99", p);

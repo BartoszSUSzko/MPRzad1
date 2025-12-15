@@ -54,13 +54,11 @@ class WikipediaTest {
     }
 
 
-
-
-
     @Test
-    @DisplayName("PoleWyszukiwaniaNaStronieGlownej")
-    void PoleWyszukiwaniaNaStronieGlownej() {
-        WebElement search = driver.findElement(SEARCH_INPUT);
+    @DisplayName("shouldDisplaySearchInputOnMainPage")
+    void poleWyszukiwaniaNaStronieGlownej() {
+        List<WebElement> cookieBanner = driver.findElements(By.cssSelector(".banner-wrapper, #mw-cookie-warning, .cookie-notice"));
+        WebElement search = wait.until(ExpectedConditions.visibilityOfElementLocated(SEARCH_INPUT));
 
         assertThat(search.isDisplayed()).isTrue();
     }
@@ -77,7 +75,7 @@ class WikipediaTest {
 
     @Test
     @DisplayName("WeryfikacjaTytuluStrony")
-    void WeryfikacjaTytuluStrony() {
+    void weryfikacjaTytuluStrony() {
         driver.findElement(SEARCH_INPUT).sendKeys("Java", Keys.ENTER);
 
         wait.until(ExpectedConditions.titleContains("Java"));
@@ -87,7 +85,7 @@ class WikipediaTest {
 
     @Test
     @DisplayName("SprawdzanieWyszukiwaniaCzyDziala")
-    void SprawdzeniePodpowiedziWSzukajce() {
+    void sprawdzeniePodpowiedziWSzukajce() {
 
         WebElement searchInput = driver.findElement(SEARCH_INPUT);
         searchInput.sendKeys("ja");
@@ -109,7 +107,7 @@ class WikipediaTest {
 
     @Test
     @DisplayName("LinkIWeryfikacjaZmianyURL")
-    void LinkIWeryfikacjaZmianyURL() {
+    void linkIWeryfikacjaZmianyURL() {
         driver.findElement(SEARCH_INPUT).sendKeys("Java", Keys.ENTER);
         wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_TITLE));
 
@@ -122,25 +120,22 @@ class WikipediaTest {
 
     @Test
     @DisplayName("SprawdzenieDzialaniaLinkuStronaGlownawmenubocznym")
-    void SprawdzenieLinkuStronaGlowna() {
+    void sprawdzenieLinkuStronaGlowna() {
 
-        // 1. Wyszukaj coś, żeby nie być na stronie głównej
+
         driver.findElement(SEARCH_INPUT).sendKeys("Java", Keys.ENTER);
         wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_TITLE));
 
-        // 2. Kliknij link "Strona główna" w menu bocznym
         driver.findElement(By.id("n-mainpage-description")).click();
 
-        // 3. Poczekaj aż załaduje się strona główna
         wait.until(ExpectedConditions.titleContains("Wikipedia"));
 
-        // 4. Sprawdź, że faktycznie jesteś na stronie głównej
         assertThat(driver.getCurrentUrl()).contains("wikipedia.org");
     }
 
     @Test
     @DisplayName("WeryfikacjaObecnosciSekcjiSpisTreściWDłuższymArtykule")
-    void WeryfikacjaSpisuTresci() {
+    void weryfikacjaSpisuTresci() {
 
         driver.findElement(SEARCH_INPUT).sendKeys("Java", Keys.ENTER);
 
@@ -159,7 +154,7 @@ class WikipediaTest {
 
     @Test
     @DisplayName("SprawdzanieZeNaglowekArtykuluOdpowiadaWyszukiwanejFrazie")
-    void SprawdzanieZeNaglowekArtykuluOdpowiadaWyszukiwanejFrazie() {
+    void sprawdzanieZeNaglowekArtykuluOdpowiadaWyszukiwanejFrazie() {
         driver.findElement(SEARCH_INPUT).sendKeys("Java", Keys.ENTER);
 
         WebElement toc = wait.until(ExpectedConditions.visibilityOfElementLocated(CONTENT_TABLE));
@@ -169,7 +164,7 @@ class WikipediaTest {
 
     @Test
     @DisplayName("PrzynajmniejJedenObrazek")
-    void shouldContainAtLeastOneImageInArticle() {
+    void przynajmniejJedenObrazek() {
         driver.findElement(SEARCH_INPUT).sendKeys("Java", Keys.ENTER);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(IMAGES));
@@ -178,8 +173,8 @@ class WikipediaTest {
     }
 
     @Test
-    @DisplayName("Sprawdzenie, że artykuł zawiera sekcję 'Przypisy' lub 'Bibliografia'")
-    void shouldContainReferencesOrBibliography() {
+    @DisplayName("SprawdzenieżeartykuzawierasekcjPrzypisyluBibliografia")
+    void zaweiraSekcjePrzypisylubBibliografia() {
 
         driver.findElement(SEARCH_INPUT).sendKeys("Java", Keys.ENTER);
         wait.until(ExpectedConditions.visibilityOfElementLocated(ARTICLE_TITLE));

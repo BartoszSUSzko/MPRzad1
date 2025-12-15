@@ -15,6 +15,7 @@ public class Main {
     public static void main(String[] args) {
         PracownikManager manager = new PracownikManager();
 
+        /*
 
         ImportService importService = new ImportService(manager);
         PodsumowanieImportu podsumowanie = importService.importujZCsv("employees.csv");
@@ -48,6 +49,9 @@ public class Main {
         Map<String, StatystykiFirmy> statystyki = manager.getCompanyStatistics();
         for (String firma : statystyki.keySet()) {
             System.out.println(statystyki.get(firma));
-        }
+           }
+
+         */
+
     }
 }
