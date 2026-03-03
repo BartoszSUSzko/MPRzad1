@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nowoczesna Strona</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #e9ecef;
+        }
+
+        /* GŁÓWNY KONTENER */
+        .container {
+            width: 95%;
+            max-width: 1400px;
+            height: 95vh;
+            display: flex;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        /* LEWA KOLUMNA - NAWIGACJA */
+        nav {
+            flex: 1;
+            min-width: 220px;
+            background: blue;
+            color: white;
+            padding-top: 40px;
+        }
+
+        nav ul {
+            list-style: none;
+        }
+
+        nav li {
+            position: relative;
+        }
+
+        nav a {
+            display: block;
+            padding: 15px 20px;
+            text-decoration: none;
+            color: #00d4ff;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        nav li ul {
+            display: none;
+            background: rgba(255,255,255,0.1);
+        }
+
+        nav li ul a {
+            color: #ffc107;
+            padding-left: 40px;
+        }
+
+        nav li:hover > ul {
+            display: block;
+        }
+
+        nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* PRAWA KOLUMNA - TREŚĆ */
+        .content {
+            flex: 3;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* PASEK Z LOGO */
+        .logo-bar {
+            position: sticky;
+            top: 0;
+            background: cornflowerblue;
+            color: cornflowerblue; /* kolor tekstu dla kontrastu z białym logo */
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+
+        .logo-bar .logo {
+            color: white;
+            padding: 5px 15px;
+            font-weight: bold;
+            border-radius: 3px;
+        }
+
+        .scrollable {
+            flex: 1;
+            overflow-y: auto;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section-line {
+            margin: 10px 0 15px 0;
+            border: none;
+            height: 3px;
+            background: linear-gradient(to right, cornflowerblue, blue);
+            border-radius: 3px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+
+        th {
+            background: #343a40;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+
+        .three-boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            color: white;
+            gap: 20px;
+        }
+
+        .box {
+            background: deepskyblue;
+            padding: 30px;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .two-paragraphs {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .two-paragraphs p {
+            width: 48%;
+        }
+
+        footer {
+            background: #212529;
+            color: white;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            text-align: center;
+        }
+
+        @media(max-width:900px){
+            .container { flex-direction: column; }
+            nav { min-height: 200px; }
+            .columns { grid-template-columns: 1fr; }
+            footer { grid-template-columns: 1fr; gap: 10px; }
+            .two-paragraphs p { width: 100%; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- LEWA NAWIGACJA -->
+    <nav>
+        <ul>
+            <li><a href="#">Strona Główna</a></li>
+            <li>
+                <a href="#">Oferta</a>
+                <ul>
+                    <li><a href="#">Projektowanie</a></li>
+                    <li><a href="#">Programowanie</a></li>
+                    <li><a href="#">Marketing</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">O nas</a>
+                <ul>
+                    <li><a href="#">Zespół</a></li>
+                    <li><a href="#">Historia</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Kontakt</a></li>
+        </ul>
+    </nav>
+
+    <!-- PRAWA CZĘŚĆ -->
+    <div class="content">
+
+        <div class="logo-bar">
+            <div class="logo">Title1</div>
+        </div>
+
+        <div class="scrollable">
+
+            <div class="two-paragraphs">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Donec fermentum, nulla at pulvinar efficitur, sapien lacus varius justo, sed lacinia.</p>
+            </div>
+
+            <div class="columns">
+                <div>
+                    <h2>subtitle</h2>
+                    <hr class="section-line">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <div>
+                    <h2>subtitle</h2>
+                    <hr class="section-line">
+                    <p>Donec fermentum, nulla at pulvinar efficitur.</p>
+                </div>
+                <div>
+                    <h2>subtitle</h2>
+                    <hr class="section-line">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                </div>
+                <div>
+                    <h2>subtitle</h2>
+                    <hr class="section-line">
+                    <ol>
+                        <li>Item 1</li>
+                        <li>Item 2</li>
+                        <li>Item 3</li>
+                    </ol>
+                </div>
+            </div>
+
+            <h2>Tabela danych</h2>
+            <table>
+                <tr><th>col1</th><th>col2</th><th>col3</th></tr>
+                <tr><td>11</td><td>12</td><td>13</td></tr>
+                <tr><td>21</td><td>22</td><td>23</td></tr>
+            </table>
+
+            <div class="three-boxes">
+                <div class="box">Sample text 1</div>
+                <div class="box">Sample text 2</div>
+                <div class="box">Sample text 3</div>
+            </div>
+
+        </div>
+
+        <footer>
+            <div>
+                <h2>Kolumna 1</h2>
+                <p>Przykładowy tekst</p>
+            </div>
+            <div>
+                <h2>Kolumna 2</h2>
+                <p>Przykładowy tekst</p>
+            </div>
+            <div>
+                <h2>Kolumna 3</h2>
+                <p>Przykładowy tekst</p>
+            </div>
+        </footer>
+
+    </div>
+
+</div>
+
+</body>
+</html>
